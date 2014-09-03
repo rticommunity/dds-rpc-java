@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!--
+Copyright 2014, Object Management Group, Inc.
+Copyright 2014, Real-Time Innovations, Inc.
+All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<project name="omg-dds-rpc" default="package-all">
+    <!-- Initialize variables used by multiple targets -->
+    <target name="init">
+        <property name="src.dir"          value="src" />
+        <property name="class.dir"        value="class" />
+        <property name="lib.dir"          value="lib" />
+        <property name="jar.file"         value="${lib.dir}/omg-dds-rpc-java.jar" />
+        <property name="src.zipfile"      value="${lib.dir}/omg-dds-rpc-java-src.zip" />
+    	<property name="omgdds.jar.path"  value="../datadistrib4j/trunk/lib" />
+    </target>
+
+    <!-- Remove files from staging areas -->
+    <target name="clean" depends="init">
+        <delete dir="${class.dir}" />
+        <delete dir="${lib.dir}" />
+    </target>
+
+    <!-- Build jar file of compiled sources -->
+    <target name="build-jar" depends="init">
+    	<fail message="Can't find omgdds.jar at ${omgdds.jar.path}">
+    	    <condition>
+    	        <not>
+    	            <resourcecount count="1">
+    	                <fileset id="omgdds" dir="${omgdds.jar.path}" includes="omgdds.jar"/>
+    	            </resourcecount>
+    	        </not>
+    	    </condition>
+    	</fail>
+        <!-- Clean destination directory -->
+        <delete dir="${class.dir}" />
+        <mkdir dir="${class.dir}" />
+    	<path id="external.classpath">
+    	    <pathelement location="${omgdds.jar.path}/omgdds.jar"/>
+    	</path>
+        <!-- Compile Java sources -->
+        <javac fork="yes"
+               compiler="javac1.5"
+               source="1.5"
+               target="1.5"
+               debug="false"
+               deprecation="true"
+               optimize="true"
+               srcdir="${src.dir}"
+               destdir="${class.dir}"
+               excludes="**/CVS/*"
+               classpath="${src.dir}"
+               includeantruntime="false">
+        	<classpath>
+        	    <path refid="external.classpath" />
+        	  </classpath>
+        </javac>
+
+        <!-- Include license and copyright information -->
+        <copy todir="${class.dir}">
+            <fileset dir=".">
+                <include name="LICENSE" />
+                <include name="NOTICE" />
+            </fileset>
+        </copy>
+
+        <!-- Create JAR file -->
+        <mkdir dir="${lib.dir}" />
+        <jar basedir="${class.dir}"
+             destfile="${jar.file}"
+        />
+    </target>
+
+    <!-- Build zip file of Eclipse project source -->
+    <target name="zip-source" depends="init">
+        <property name="staging.dir" value="${class.dir}/omg-dds-rpc-java" />
+        <property name="javadoc.dir" value="${staging.dir}/doc" />
+
+        <!-- Clean destination directory -->
+        <delete dir="${class.dir}" />
+        <mkdir dir="${staging.dir}"/>
+
+        <!-- Copy stuff we're going to zip -->
+        <copy todir="${staging.dir}">
+            <fileset dir=".">
+                <include name="LICENSE" />
+                <include name="NOTICE" />
+                <include name="${src.dir}/**/*.java"/>
+                <include name="build.xml" />
+                <!--include name=".classpath" /-->
+                <include name=".externalToolBuilders" />
+                <!--include name=".project" /-->
+                <include name=".settings" />
+            </fileset>
+        </copy>
+
+        <!-- Build JavaDoc -->
+        <!--javadoc sourcepath="${src.dir}"
+                 destdir="${javadoc.dir}"
+                 windowtitle="OMG RPC over DDS"
+                 version="true"
+                 use="true"
+                 overview="${src.dir}/overview.html"
+                 failonerror="true">
+            <doctitle><![CDATA[
+                <h1>OMG RPC over DDS<br/>
+                API Specification</h1>
+            ]]></doctitle>
+            <bottom><![CDATA[
+                <p align="left"><small>
+                Copyright &#169; 2014 Real-Time Innovations, Inc. (RTI)<br/>
+                Copyright &#169; 2014 Object Management Group, Inc. (OMG)<br/>
+                All Rights Reserved.
+                </small></p>
+            ]]></bottom>
+        </javadoc-->
+
+        <!-- Zip it -->
+        <mkdir dir="${lib.dir}" />
+        <zip basedir="${class.dir}"
+             includes="omg-dds-rpc-java/**"
+             destfile="${src.zipfile}"
+             duplicate="fail"
+             whenempty="fail"
+        />
+    </target>
+
+    <!-- Build jar and zip files -->
+    <!--target name="package-all" depends="build-jar, zip-source" /-->
+    <target name="package-all" depends="build-jar" />
+</project>
