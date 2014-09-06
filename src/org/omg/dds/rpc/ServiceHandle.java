@@ -1,6 +1,8 @@
 package org.omg.dds.rpc;
 
-public interface ServiceHandle {
+import java.io.Closeable;
+
+public interface ServiceHandle extends Closeable {
 
     public void unregister();
 

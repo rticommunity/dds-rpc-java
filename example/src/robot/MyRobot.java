@@ -1,10 +1,8 @@
 package robot;
 
-import org.omg.dds.rpc.ServiceImplementation;
-
 import robot.RobotControl;
 
-public class MyRobot extends ServiceImplementation implements RobotControl {
+public class MyRobot extends RobotControl.ServiceImpl {
     
     public void command(Command command)
     {
