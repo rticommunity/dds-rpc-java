@@ -22,6 +22,7 @@ limitations under the License.
     <target name="init">
         <property name="src.dir"          value="src" />
         <property name="class.dir"        value="class" />
+        <property name="example.dir"      value="example" />
         <property name="lib.dir"          value="lib" />
         <property name="jar.file"         value="${lib.dir}/omg-dds-rpc-java.jar" />
         <property name="src.zipfile"      value="${lib.dir}/omg-dds-rpc-java-src.zip" />
@@ -82,6 +83,36 @@ limitations under the License.
         <jar basedir="${class.dir}"
              destfile="${jar.file}"
         />
+    </target>
+	
+    <!-- Build jar file of compiled sources -->
+    <target name="build-example" depends="build-jar">
+        <delete dir="${example.dir}/class" />
+        <mkdir dir="${example.dir}/class" />
+
+    	<path id="external.classpath">
+    		<pathelement location="${omgdds.jar.path}/omgdds.jar"/>
+    		<pathelement location="${jar.file}"/>
+    	</path>
+        
+    	<!-- Compile Java sources -->
+        <javac fork="yes"
+               compiler="javac1.5"
+               source="1.5"
+               target="1.5"
+               debug="false"
+               deprecation="true"
+               optimize="true"
+               srcdir="${example.dir}"
+               destdir="${example.dir}/class"
+               excludes="**/CVS/*"
+               classpath="${example.dir}"
+               includeantruntime="false">
+        	<classpath>
+        	    <path refid="external.classpath" />
+        	  </classpath>
+        </javac>
+
     </target>
 
     <!-- Build zip file of Eclipse project source -->
