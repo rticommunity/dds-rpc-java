@@ -6,10 +6,8 @@ import org.omg.dds.sub.DataReaderQos;
 import org.omg.dds.pub.Publisher;
 import org.omg.dds.pub.DataWriterQos;
 
-
 public interface ServiceParams {
     
-    public ServiceParams withServer(Server server);
     public ServiceParams withDomainParticipant(DomainParticipant participant);
     public ServiceParams withServiceName (String name);
     public ServiceParams withInstanceName (String name);
@@ -19,8 +17,8 @@ public interface ServiceParams {
     public ServiceParams withDataReaderQos (DataReaderQos qos);
     public ServiceParams withPublisher (Publisher publisher);
     public ServiceParams withSubscriber (Subscriber subscriber);
+    public ServiceParams withServer(Server server);
 
-    public Server getServer();
     public DomainParticipant getDomainParticipant();
     public String getServiceName();
     public String getInstanceName(); 
@@ -30,6 +28,6 @@ public interface ServiceParams {
     public DataReaderQos getDataReaderQos();
     public Publisher getPublisher();
     public Subscriber getSubscriber();
-
+    public Server getServer();
 
 }

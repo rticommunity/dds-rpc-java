@@ -7,15 +7,17 @@ public abstract class ServiceImplBase implements Closeable {
 
     private ServiceParams serviceParams;
     
-    public ServiceParams getServiceParams()
+    public final ServiceParams getServiceParams()
     {
         return serviceParams;
     }
     
-    public void activate(ServiceParams params)
+    public final void setServiceParams(ServiceParams params)
     {
         serviceParams = params;
-    }    
+    }
+    
+    public abstract void activate();    
     
     // Use Closeable.close in place of deactivate
     public abstract void close() throws IOException;

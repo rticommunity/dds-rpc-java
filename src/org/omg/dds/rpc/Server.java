@@ -5,7 +5,7 @@ import org.omg.dds.core.DDSObject;
 import org.omg.dds.core.Duration;
 import java.util.concurrent.ExecutorService;
 
-public interface Server extends DDSObject, Closeable {
+public interface Server extends RPCObject, Closeable {
 
     // blocking
     public void run();
@@ -16,7 +16,7 @@ public interface Server extends DDSObject, Closeable {
     // not blocking
     public void run(Duration maxWait);
     
-    public ExecutorService getExecutor();
+    public ServerParams getServerParams();
     
     public ServiceHandle registerService(
             ServiceImplBase serviceImpl, 

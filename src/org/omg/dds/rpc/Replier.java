@@ -1,8 +1,8 @@
 package org.omg.dds.rpc;
 
 import java.io.Closeable;
-import org.omg.dds.core.Duration;
 
+import org.omg.dds.core.Duration;
 import org.omg.dds.core.DDSObject;
 import org.omg.dds.rpc.Sample;
 import org.omg.dds.rpc.ReplierParams;
@@ -13,7 +13,7 @@ import org.omg.dds.sub.DataReaderQos;
 import org.omg.dds.pub.DataWriterQos;
 
 public interface Replier<TReq, TRep> 
-	extends Closeable, DDSObject 
+	extends RPCObject, Closeable 
 {
     public void sendReply(
             TRep reply,
@@ -50,7 +50,7 @@ public interface Replier<TReq, TRep>
 
     public DataWriter<TRep> getReplyDatawriter();
 
-    public ReplierParams getParams();
+    public ReplierParams getReplierParams();
 
     public void setDatawriterQos(DataWriterQos dwqos);
 

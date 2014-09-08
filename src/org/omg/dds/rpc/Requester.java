@@ -12,14 +12,20 @@ import org.omg.dds.pub.DataWriter;
 import org.omg.dds.sub.DataReaderQos;
 import org.omg.dds.pub.DataWriterQos;
 
+import java.util.concurrent.ExecutorService;
+
 public interface Requester<TReq, TRep> 
-  extends Closeable, DDSObject 
+  extends RPCObject, Closeable 
 {
     public SampleIdentity sendRequest(TReq request);
 
     public void sendRequestOneway(TReq request);
     
-    public Future<Sample<TRep>> sendRequestAsync(TReq request);
+    public Future<Sample<TRep>> 
+        sendRequestAsync(TReq request);
+
+    public Future<Sample<TRep>> 
+        sendRequestAsync(TReq request, ExecutorService executor);
 
     public Sample<TRep> receiveReply(Duration timeout);
 
@@ -73,7 +79,7 @@ public interface Requester<TReq, TRep>
 
     public DataReader<TRep> getReplyDatareader();
 
-    public RequesterParams getParams();
+    public RequesterParams getRequesterParams();
 
     public void setDatawriterQos(DataWriterQos dwqos);
 

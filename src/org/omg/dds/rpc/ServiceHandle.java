@@ -12,4 +12,6 @@ public interface ServiceHandle extends Closeable {
     
     public ServiceStatus status();
     
+    public ServiceParams getServiceParams();
+    
 }

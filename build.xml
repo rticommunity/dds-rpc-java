@@ -171,5 +171,5 @@ limitations under the License.
 
     <!-- Build jar and zip files -->
     <!--target name="package-all" depends="build-jar, zip-source" /-->
-    <target name="package-all" depends="build-jar" />
+    <target name="package-all" depends="build-example" />
 </project>
