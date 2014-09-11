@@ -1,21 +1,14 @@
 package org.omg.dds.rpc;
 
-import java.io.Closeable;
 import java.util.concurrent.Future;
-
-import org.omg.dds.core.DDSObject;
 import org.omg.dds.core.Duration;
 import org.omg.dds.rpc.Sample;
 import org.omg.dds.core.SampleIdentity;
-import org.omg.dds.sub.DataReader;
-import org.omg.dds.pub.DataWriter;
-import org.omg.dds.sub.DataReaderQos;
-import org.omg.dds.pub.DataWriterQos;
 
 import java.util.concurrent.ExecutorService;
 
 public interface Requester<TReq, TRep> 
-  extends RPCObject, Closeable 
+  extends RPCClientEndpoint<TReq, TRep> 
 {
     public SampleIdentity sendRequest(TReq request);
 
@@ -75,29 +68,7 @@ public interface Requester<TReq, TRep>
     public Sample<TRep> readReplies(
         SampleIdentity relatedRequestId);
 
-    public DataWriter<TReq> getRequestDatawriter();
-
-    public DataReader<TRep> getReplyDatareader();
+    boolean receiveNondataSamples(boolean enable);
 
     public RequesterParams getRequesterParams();
-
-    public void setDatawriterQos(DataWriterQos dwqos);
-
-    public void setDatareaderQos(DataReaderQos drqos);
-    
-    public void waitForReplier(int howmany, Duration maxWait);
-
-    public void waitForReplier(
-      String instanceName, 
-      Duration maxWait);
-
-    public boolean bind(String instanceName);
-    
-    boolean unbind();
-    
-    boolean isBound();
-
-    String boundInstance();
-
-    void enableNondataSamples();
 }

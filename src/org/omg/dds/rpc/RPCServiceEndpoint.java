@@ -11,9 +11,4 @@ public interface RPCServiceEndpoint<TReq, TRep> extends RPCEntity {
 
     public DataWriter<TRep> getReplyDataWriter();
 
-    public void setDatawriterQos(DataWriterQos dwqos);
-
-    public void setDatareaderQos(DataReaderQos drqos);
-
-    void enableNondataSamples();
 }

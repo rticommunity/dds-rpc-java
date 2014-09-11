@@ -39,4 +39,5 @@ public interface RequesterParams {
     public Subscriber getSubscriber();
     public ExecutorService executor();
 
+    public RequesterParams clone();
 }

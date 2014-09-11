@@ -17,7 +17,6 @@ public interface ServiceParams {
     public ServiceParams withDataReaderQos (DataReaderQos qos);
     public ServiceParams withPublisher (Publisher publisher);
     public ServiceParams withSubscriber (Subscriber subscriber);
-    public ServiceParams withServer(Server server);
 
     public DomainParticipant getDomainParticipant();
     public String getServiceName();
@@ -28,6 +27,6 @@ public interface ServiceParams {
     public DataReaderQos getDataReaderQos();
     public Publisher getPublisher();
     public Subscriber getSubscriber();
-    public Server getServer();
 
+    public ServiceParams clone();
 }

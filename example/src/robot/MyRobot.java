@@ -2,11 +2,10 @@ package robot;
 
 import robot.RobotControl;
 
-public class MyRobot extends RobotControl.ServiceImpl {
+public class MyRobot implements RobotControl {
     
     public void command(Command command)
-    {
-        
+    {        
     }
     
     public float setSpeed(float speed)
@@ -20,8 +19,7 @@ public class MyRobot extends RobotControl.ServiceImpl {
     }
     
     public void getStatus(Status status)
-    {
-        
+    {        
     }
 
 }

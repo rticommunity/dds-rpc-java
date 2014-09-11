@@ -25,13 +25,10 @@ public class TestRobot {
         
         MyRobot myRobot = new MyRobot();
         
-        ServerParams serverParams = runtime.createServerParams();
-        // change serverParams here if you like
-        Server server = runtime.createServer(serverParams);
-        
-        ServiceParams serviceParams = runtime.createServiceParams();
-        // change serviceParams here if you like
-        server.registerService(myRobot, serviceParams);
+        Server server = runtime.createServer();
+
+        RobotControlSupport.Service service = 
+                RobotControlSupport.createService(myRobot, server);
         
         server.run();
 
@@ -40,25 +37,24 @@ public class TestRobot {
     static void createRobotClient(RPCRuntime runtime) {
         
         ClientParams clientParams = runtime.createClientParams();
-        // change params here if you like
-        Client client = runtime.createClient(clientParams);
 
-        RobotControl.ServiceProxy robotProxy = 
-                new RobotControl.ServiceProxy();
+        RobotControlSupport.Client robotClient = 
+                RobotControlSupport.createClient(clientParams);
         
-        robotProxy.resolveService(client, "MyRobot");
+        robotClient.waitForService();
         
-        robotProxy.getSpeed();
+        robotClient.getSpeed();
     }
 
     static void createRobotRequester(RPCRuntime runtime) {
         
         RequesterParams reqParams = runtime.createRequesterParams();
         // change params here if you like
-        Requester<RobotControl.RequestType, RobotControl.ReplyType>
+        Requester<RobotControlSupport.RequestType, 
+                  RobotControlSupport.ReplyType>
              requester = runtime.createRequester(
-                             RobotControl.RequestType.class,
-                             RobotControl.ReplyType.class,
+                             RobotControlSupport.RequestType.class,
+                             RobotControlSupport.ReplyType.class,
                              reqParams);
 
      }
@@ -67,10 +63,11 @@ public class TestRobot {
         
         ReplierParams repParams = runtime.createReplierParams();
         // change params here if you like         
-        Replier<RobotControl.RequestType, RobotControl.ReplyType>
+        Replier<RobotControlSupport.RequestType, 
+                RobotControlSupport.ReplyType>
              replier = runtime.createReplier(
-                     RobotControl.RequestType.class,
-                     RobotControl.ReplyType.class,
+                     RobotControlSupport.RequestType.class,
+                     RobotControlSupport.ReplyType.class,
                      repParams);
 
      }

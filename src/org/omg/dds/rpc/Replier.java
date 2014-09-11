@@ -1,19 +1,12 @@
 package org.omg.dds.rpc;
 
-import java.io.Closeable;
-
 import org.omg.dds.core.Duration;
-import org.omg.dds.core.DDSObject;
 import org.omg.dds.rpc.Sample;
 import org.omg.dds.rpc.ReplierParams;
 import org.omg.dds.core.SampleIdentity;
-import org.omg.dds.sub.DataReader;
-import org.omg.dds.pub.DataWriter;
-import org.omg.dds.sub.DataReaderQos;
-import org.omg.dds.pub.DataWriterQos;
 
 public interface Replier<TReq, TRep> 
-	extends RPCObject, Closeable 
+	extends RPCServiceEndpoint<TReq, TRep> 
 {
     public void sendReply(
             TRep reply,
@@ -46,15 +39,7 @@ public interface Replier<TReq, TRep>
 
     public Sample.Iterator<TReq> readRequests(int maxSamples);
 
-    public DataReader<TReq> getRequestDatareader();
-
-    public DataWriter<TRep> getReplyDatawriter();
-
+    boolean receiveNondataSamples(boolean enable);
+    
     public ReplierParams getReplierParams();
-
-    public void setDatawriterQos(DataWriterQos dwqos);
-
-    public void setDatareaderQos(DataReaderQos drqos);
-
-    void enableNondataSamples();
 }

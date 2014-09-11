@@ -38,4 +38,5 @@ public interface ReplierParams {
     public Publisher getPublisher();
     public Subscriber getSubscriber();
 
+    public ReplierParams clone();
 }

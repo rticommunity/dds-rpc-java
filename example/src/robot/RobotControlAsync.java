@@ -10,6 +10,6 @@ public interface RobotControlAsync {
     
     public Future<Float> getSpeedAsync();
     
-    public Future<RobotControl_getStatus_Out> getStatusAsync(Status status);
+    public Future<RobotControl_getStatus_Out> getStatusAsync();
     
 }

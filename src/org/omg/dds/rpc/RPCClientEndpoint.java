@@ -6,6 +6,7 @@ import org.omg.dds.pub.DataWriter;
 import org.omg.dds.pub.DataWriterQos;
 import org.omg.dds.sub.DataReader;
 import org.omg.dds.sub.DataReaderQos;
+import org.omg.dds.core.Duration;
 
 public interface RPCClientEndpoint<TReq, TRep> extends RPCEntity {
 
@@ -13,34 +14,41 @@ public interface RPCClientEndpoint<TReq, TRep> extends RPCEntity {
 
     public DataReader<TRep> getReplyDataReader();
     
-    public void setDatawriterQos(DataWriterQos dwqos);
 
-    public void setDatareaderQos(DataReaderQos drqos);
-
-    public void bind(String instanceName);
     
-    public void unbind();
+    public boolean bind(String instanceName);
+    
+    public boolean unbind();
     
     public boolean isBound();
     
-    public String getBoundInstance();
+    public String getBoundInstanceName();
     
-    public boolean waitForService();
+    public String[] getDiscoveredServiceInstances();
     
-    public boolean waitForServiceInstance(String instanceName);
     
-    public boolean waitForServices(int count);
     
-    public boolean waitForServiceInstances(String... instanceNames);
+    public void waitForService();
+    public void waitForService(Duration maxWait);
+    
+    public void waitForService(String instanceName);
+    public void waitForService(Duration maxWait, String instanceName);
+    
+    
+    public void waitForServices(int count);
+    public void waitForServices(Duration maxWait, int count);
+    
+    public void waitForServices(String... instanceNames);
+    public void waitForServices(Duration maxWait, String... instanceNames);
+    
+    
     
     public Future<Boolean> waitForServiceAsync();
     
-    public Future<Boolean> waitForInstanceAsync(String instanceName);
+    public Future<Boolean> waitForServiceAsync(String instanceName);
     
     public Future<Boolean> waitForServicesAsync(int count);
     
-    public Future<Boolean> waitForInstancesAsync(String... instanceNames);
+    public Future<Boolean> waitForServicesAsync(String... instanceNames);
         
-    void enableNondataSamples();
-
 }

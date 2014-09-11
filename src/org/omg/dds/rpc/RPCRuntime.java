@@ -2,6 +2,7 @@ package org.omg.dds.rpc;
 
 import org.omg.dds.core.ServiceEnvironment;
 import org.omg.dds.core.SampleIdentity;
+import java.util.concurrent.ExecutorService;
 
 public abstract class RPCRuntime extends ServiceEnvironment {
 
@@ -37,23 +38,15 @@ public abstract class RPCRuntime extends ServiceEnvironment {
 
     public abstract Server createServer();
     
-    public abstract Server createServer(ServerParams params);
-    
-    public abstract Client createClient();
-    
-    public abstract Client createClient(ClientParams params);
-    
-    
+    public abstract Server createServer(ServerParams serverParams);
     
     /* createParams methods */
     
     public abstract ServerParams createServerParams();
     
-    public abstract ClientParams createClientParams();
-    
     public abstract ServiceParams createServiceParams();
     
-    public abstract ServiceProxyParams createServiceProxyParams();
+    public abstract ClientParams createClientParams();
     
     public abstract RequesterParams createRequesterParams();
     
