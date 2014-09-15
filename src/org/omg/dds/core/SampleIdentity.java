@@ -1,5 +1,7 @@
 package org.omg.dds.core;
 
+import java.util.UUID;
+
 public interface SampleIdentity {
   
 	@Override
@@ -8,7 +10,7 @@ public interface SampleIdentity {
 	@Override
 	public int hashCode();
 	
-	public long guid();
+	public UUID guid();
 	
 	public long sequenceNumber();
 }

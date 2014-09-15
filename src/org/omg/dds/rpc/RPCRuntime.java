@@ -1,8 +1,6 @@
 package org.omg.dds.rpc;
 
 import org.omg.dds.core.ServiceEnvironment;
-import org.omg.dds.core.SampleIdentity;
-import java.util.concurrent.ExecutorService;
 
 public abstract class RPCRuntime extends ServiceEnvironment {
 

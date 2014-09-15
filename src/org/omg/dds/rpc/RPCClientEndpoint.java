@@ -3,9 +3,7 @@ package org.omg.dds.rpc;
 import java.util.concurrent.Future;
 
 import org.omg.dds.pub.DataWriter;
-import org.omg.dds.pub.DataWriterQos;
 import org.omg.dds.sub.DataReader;
-import org.omg.dds.sub.DataReaderQos;
 import org.omg.dds.core.Duration;
 
 public interface RPCClientEndpoint<TReq, TRep> extends RPCEntity {
