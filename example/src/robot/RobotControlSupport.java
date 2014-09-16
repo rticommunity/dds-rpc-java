@@ -24,41 +24,14 @@ public abstract class RobotControlSupport {
         // omg.dds.rpc.ReplyHeader header;
         // data
     }
-
+        
     public interface Client 
-        extends RobotControl, RobotControlAsync, ServiceProxy
-    {               
-        public <TReq> DataWriter<TReq> getRequestDataWriter(Class<TReq> requestType);
-
-        public <TRep> DataReader<TRep> getReplyDataReader(Class<TRep> replyType);
-
-        public ClientParams getClientParams();
-        public ClientParams getClientParams(Class<?> interfaceType);
-        
-        public Dictionary<Class<?>, ClientParams> getClientHierarchyParams();
-        
+        extends RobotControl, RobotControlAsync, ClientEndpoint
+    {                       
     }
         
-    public interface Service extends RPCEntity
+    public interface Service extends ServiceEndpoint
     {
-        public void pause();
-        public void pause(Class<?> interfaceType);
-        
-        public void resume();
-        public void resume(Class<?> interfaceType);
-        
-        public ServiceStatus status();
-        public ServiceStatus status(Class<?> interfaceType);
-        
-        public ServiceParams getServiceParams();
-        public ServiceParams getServiceParams(Class<?> interfaceType);
-
-        public Dictionary<Class<?>, ServiceParams> getServiceHierarchyParams();
-
-        public <TReq> DataReader<TReq> getRequestDataReader(Class<TReq> requestType);
-
-        public <TRep> DataWriter<TRep> getReplyDataWriter(Class<TRep> replyType);
-
     }
     
     public static final RobotControlSupport.Client 
