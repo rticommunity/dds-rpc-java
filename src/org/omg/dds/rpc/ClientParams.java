@@ -1,7 +1,5 @@
 package org.omg.dds.rpc;
 
-import java.util.concurrent.ExecutorService;
-
 import org.omg.dds.domain.DomainParticipant;
 import org.omg.dds.pub.DataWriterQos;
 import org.omg.dds.pub.Publisher;
@@ -19,7 +17,6 @@ public interface ClientParams {
     public ClientParams withDataReaderQos (DataReaderQos qos);
     public ClientParams withPublisher (Publisher publisher);
     public ClientParams withSubscriber (Subscriber subscriber);
-    public ClientParams withExecutor(ExecutorService executor);
 
     public DomainParticipant getDomainParticipant();
     public String getServiceName();
@@ -30,7 +27,6 @@ public interface ClientParams {
     public DataReaderQos getDataReaderQos();
     public Publisher getPublisher();
     public Subscriber getSubscriber();
-    public ExecutorService getExecutor();
 
     public ClientParams clone();
 }

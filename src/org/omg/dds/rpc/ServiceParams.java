@@ -27,6 +27,6 @@ public interface ServiceParams {
     public DataReaderQos getDataReaderQos();
     public Publisher getPublisher();
     public Subscriber getSubscriber();
-
+    
     public ServiceParams clone();
 }

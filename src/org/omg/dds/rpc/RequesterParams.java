@@ -8,6 +8,7 @@ import org.omg.dds.sub.DataReaderQos;
 import org.omg.dds.pub.Publisher;
 import org.omg.dds.pub.DataWriterQos;
 import java.util.concurrent.ExecutorService;
+import java.util.EventListener;
 
 public interface RequesterParams {
 	
@@ -28,8 +29,8 @@ public interface RequesterParams {
     public RequesterParams withExecutor(ExecutorService executor);
 
     public DomainParticipant getDomainParticipant();
-    public ListenerBase getSimpleRequesterListener();
-    public ListenerBase getRequesterListener();
+    public EventListener getSimpleRequesterListener();
+    public EventListener getRequesterListener();
     public String getServiceName();
     public String getRequestTopicName();
     public String getReplyTopicName();

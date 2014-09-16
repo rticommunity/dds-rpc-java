@@ -7,9 +7,6 @@ public interface Server extends RPCEntity {
 
     // blocking
     public void run();
-
-    //blocking 
-    public void run(ExecutorService executor);
     
     // not blocking
     public void run(Duration maxWait);

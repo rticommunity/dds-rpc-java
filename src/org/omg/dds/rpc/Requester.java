@@ -1,14 +1,16 @@
 package org.omg.dds.rpc;
 
 import java.util.concurrent.Future;
+
 import org.omg.dds.core.Duration;
+import org.omg.dds.pub.DataWriter;
 import org.omg.dds.rpc.Sample;
+import org.omg.dds.sub.DataReader;
 import org.omg.dds.core.SampleIdentity;
 
 import java.util.concurrent.ExecutorService;
 
-public interface Requester<TReq, TRep> 
-  extends RPCClientEndpoint<TReq, TRep> 
+public interface Requester<TReq, TRep> extends ClientEndpoint 
 {
     public SampleIdentity sendRequest(TReq request);
 
@@ -71,4 +73,9 @@ public interface Requester<TReq, TRep>
     boolean receiveNondataSamples(boolean enable);
 
     public RequesterParams getRequesterParams();
+    
+    public DataWriter<TReq> getRequestDataWriter();
+
+    public DataReader<TRep> getReplyDataReader();
+
 }

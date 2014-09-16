@@ -4,6 +4,7 @@ package robot;
 
 import java.io.IOException;
 import java.util.concurrent.Future;
+import java.util.Dictionary;
 
 import org.omg.dds.core.Duration;
 import org.omg.dds.pub.DataWriter;
@@ -16,7 +17,7 @@ public abstract class RobotControlSupport {
 
     public final static class RequestType {
         // omg.dds.rpc.RequestHeader header;
-        // robot.RobotControl_Call data;
+        // data;
     }
 
     public final static class ReplyType {
@@ -25,45 +26,61 @@ public abstract class RobotControlSupport {
     }
 
     public interface Client 
-        extends RobotControl, 
-                RobotControlAsync,
-                RPCClientEndpoint<RequestType, ReplyType>  
-    {       
+        extends RobotControl, RobotControlAsync, ClientEndpoint
+    {               
+        public <TReq> DataWriter<TReq> getRequestDataWriter(Class<TReq> requestType);
+
+        public <TRep> DataReader<TRep> getReplyDataReader(Class<TRep> replyType);
+
         public ClientParams getClientParams();
+        public ClientParams getClientParams(Class<?> interfaceType);
+        
+        public Dictionary<Class<?>, ClientParams> getClientHierarchyParams();
         
     }
         
-    public interface Service 
-        extends RPCServiceEndpoint<RequestType, ReplyType>
+    public interface Service extends RPCEntity
     {
         public void pause();
+        public void pause(Class<?> interfaceType);
         
         public void resume();
+        public void resume(Class<?> interfaceType);
         
         public ServiceStatus status();
+        public ServiceStatus status(Class<?> interfaceType);
         
         public ServiceParams getServiceParams();
+        public ServiceParams getServiceParams(Class<?> interfaceType);
+
+        public Dictionary<Class<?>, ServiceParams> getServiceHierarchyParams();
+
+        public <TReq> DataReader<TReq> getRequestDataReader(Class<TReq> requestType);
+
+        public <TRep> DataWriter<TRep> getReplyDataWriter(Class<TRep> replyType);
 
     }
     
     public static final RobotControlSupport.Client 
-    createClient(
-            String serviceName)
+    createClient()
     {
         return null;
     }
 
     public static final RobotControlSupport.Client 
-    createClient(
-            String serviceName,
-            String instanceName)
+    createClient(ClientParams clientParams)
     {
         return null;
     }
 
     public static final RobotControlSupport.Client 
-    createClient(
-            ClientParams clientParams)
+    createClient(Dictionary<Class<?>, ClientParams> hierarchyParams)
+    {
+        return null;
+    }
+
+    public static final RobotControlSupport.Service 
+    createService(RobotControl serviceImpl)
     {
         return null;
     }
@@ -81,6 +98,15 @@ public abstract class RobotControlSupport {
             RobotControl serviceImpl, 
             Server server, 
             ServiceParams serviceParams)
+    {
+        return null;
+    }
+
+    public static final RobotControlSupport.Service 
+    createService(
+            RobotControl serviceImpl, 
+            Server server, 
+            Dictionary<Class<?>, ServiceParams> hierarchyParams)
     {
         return null;
     }

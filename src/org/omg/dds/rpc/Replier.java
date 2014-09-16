@@ -1,12 +1,13 @@
 package org.omg.dds.rpc;
 
 import org.omg.dds.core.Duration;
+import org.omg.dds.pub.DataWriter;
 import org.omg.dds.rpc.Sample;
 import org.omg.dds.rpc.ReplierParams;
+import org.omg.dds.sub.DataReader;
 import org.omg.dds.core.SampleIdentity;
 
-public interface Replier<TReq, TRep> 
-	extends RPCServiceEndpoint<TReq, TRep> 
+public interface Replier<TReq, TRep> extends RPCEntity 
 {
     public void sendReply(
             TRep reply,
@@ -42,4 +43,8 @@ public interface Replier<TReq, TRep>
     boolean receiveNondataSamples(boolean enable);
     
     public ReplierParams getReplierParams();
+    
+    public DataReader<TReq> getRequestDataReader();
+
+    public DataWriter<TRep> getReplyDataWriter();
 }

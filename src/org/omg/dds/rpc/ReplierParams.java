@@ -7,6 +7,7 @@ import org.omg.dds.sub.Subscriber;
 import org.omg.dds.sub.DataReaderQos;
 import org.omg.dds.pub.Publisher;
 import org.omg.dds.pub.DataWriterQos;
+import java.util.EventListener;
 
 public interface ReplierParams {
 	
@@ -27,8 +28,8 @@ public interface ReplierParams {
     public ReplierParams withSubscriber (Subscriber subscriber);
 
     public DomainParticipant getDomainParticipant();
-    public ListenerBase getSimpleRequesterListener();
-    public ListenerBase getRequesterListener();
+    public EventListener getSimpleRequesterListener();
+    public EventListener getRequesterListener();
     public String getServiceName();
     public String getInstanceName(); 
     public String getRequestTopicName();
