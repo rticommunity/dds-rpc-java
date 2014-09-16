@@ -7,6 +7,4 @@ public interface RPCEntity extends DDSObject, Closeable {
 
     public RPCRuntime getRPCRuntime();
     
-    public void enableNondataSamples();
-    
 }

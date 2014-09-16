@@ -10,7 +10,7 @@ import org.omg.dds.core.SampleIdentity;
 
 import java.util.concurrent.ExecutorService;
 
-public interface Requester<TReq, TRep> extends ClientEndpoint 
+public interface Requester<TReq, TRep> extends ServiceProxy 
 {
     public SampleIdentity sendRequest(TReq request);
 
