@@ -26,7 +26,7 @@ public abstract class RobotControlSupport {
     }
 
     public interface Client 
-        extends RobotControl, RobotControlAsync, ClientEndpoint
+        extends RobotControl, RobotControlAsync, ServiceProxy
     {               
         public <TReq> DataWriter<TReq> getRequestDataWriter(Class<TReq> requestType);
 

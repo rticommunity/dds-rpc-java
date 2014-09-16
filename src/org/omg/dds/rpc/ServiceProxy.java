@@ -1,10 +1,10 @@
 package org.omg.dds.rpc;
 
-import java.util.concurrent.Future;
 import java.util.Collection;
+import java.util.concurrent.Future;
 import org.omg.dds.core.Duration;
 
-public interface ClientEndpoint extends RPCEntity {
+public interface ServiceProxy extends RPCEntity {
 
     public boolean bind(String instanceName);
     
@@ -31,6 +31,7 @@ public interface ClientEndpoint extends RPCEntity {
     public void waitForServices(Duration maxWait, String... instanceNames);
     
     
+    
     public Future<Boolean> waitForServiceAsync();
     
     public Future<Boolean> waitForServiceAsync(String instanceName);
@@ -39,5 +40,4 @@ public interface ClientEndpoint extends RPCEntity {
     
     public Future<Boolean> waitForServicesAsync(String... instanceNames);
     
-
 }
