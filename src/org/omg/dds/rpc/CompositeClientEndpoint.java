@@ -6,6 +6,6 @@ public interface CompositeClientEndpoint extends ClientEndpoint {
     
     public ClientParams getClientParams(Class<?> interfaceType);
     
-    public Dictionary<Class<?>, ClientParams> getCompsiteClientParams();
+    public Dictionary<Class<?>, ClientParams> getCompositeClientParams();
 
 }

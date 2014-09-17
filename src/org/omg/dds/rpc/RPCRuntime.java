@@ -2,7 +2,7 @@ package org.omg.dds.rpc;
 
 import org.omg.dds.core.ServiceEnvironment;
 
-public abstract class RPCRuntime extends ServiceEnvironment {
+public abstract class RPCRuntime extends ServiceEnvironment implements Runnable {
 
 	// Singleton access
 	
@@ -11,6 +11,9 @@ public abstract class RPCRuntime extends ServiceEnvironment {
 		// placeholder implementation.
 		return null; 
 	}
+	
+	/* from Runnable */
+	public abstract void run();
 	
     public abstract <TReq, TRep> 
         Requester<TReq, TRep> createRequester(
