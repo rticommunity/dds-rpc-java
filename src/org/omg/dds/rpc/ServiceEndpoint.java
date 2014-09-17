@@ -3,18 +3,18 @@ package org.omg.dds.rpc;
 import org.omg.dds.pub.DataWriter;
 import org.omg.dds.sub.DataReader;
 
-public interface ServiceEndpoint extends RPCEntity {
+public interface ServiceEndpoint<TReq, TRep> extends RPCEntity {
 
     public void pause();
     
     public void resume();
     
-    public ServiceStatus status();
+    public ServiceStatus getServiceStatus();
     
     public ServiceParams getServiceParams();
 
-    public <TReq> DataReader<TReq> getRequestDataReader(Class<TReq> requestType);
+    public DataReader<TReq> getRequestDataReader();
 
-    public <TRep> DataWriter<TRep> getReplyDataWriter(Class<TRep> replyType);
+    public DataWriter<TRep> getReplyDataWriter();
 
 }

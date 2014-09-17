@@ -10,6 +10,12 @@ import org.omg.dds.core.SampleIdentity;
 
 import java.util.concurrent.ExecutorService;
 
+/* Note: Requester<TReq, TRep> does not extend 
+ *       ClientEndpoint<TReq, TRep> because 
+ *       getClientParams must be moved elsewhere.
+ *       As a result, obtaining ClientParams from
+ *       a ClientEndpoint becomes very hard.
+ */
 public interface Requester<TReq, TRep> extends ServiceProxy 
 {
     public SampleIdentity sendRequest(TReq request);

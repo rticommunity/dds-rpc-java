@@ -2,17 +2,24 @@ package org.omg.dds.rpc;
 
 import java.util.Dictionary;
 
-/* To be used only in case of interface inheritance in basic profile */
-public interface CompositeServiceEndpoint extends ServiceEndpoint {
+import org.omg.dds.pub.DataWriter;
+import org.omg.dds.sub.DataReader;
 
-    public void pause(Class<?> interfaceType);
-    
-    public void resume(Class<?> interfaceType);
-    
-    public ServiceStatus status(Class<?> interfaceType);
-    
-    public ServiceParams getServiceParams(Class<?> interfaceType);
+/* NOTE: CompositeServiceEndpoint is extended only by the derived
+ *       interfaces when using the basic profile. 
+ */
+public interface CompositeServiceEndpoint extends RPCEntity {
 
-    public Dictionary<Class<?>, ServiceParams> getCompositeServiceParams();
+    public void pause();
+    
+    public void resume();
+        
+    public ServiceEndpoint<?,?> getServiceEndpoint(Class<?> interfaceType);
+    
+    public Dictionary<Class<?>, ServiceEndpoint<?,?>> getAllServiceEndpoints();
 
+    public <TReq> DataReader<TReq> getRequestDataReader(Class<?> requestType);
+
+    public <TRep> DataWriter<TRep> getReplyDataWriter(Class<?> replyType);
+    
 }
