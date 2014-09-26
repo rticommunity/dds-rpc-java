@@ -32,12 +32,12 @@ public interface ServiceProxy extends RPCEntity {
     
     
     
-    public Future<Boolean> waitForServiceAsync();
+    public Future<Void> waitForServiceAsync();
     
-    public Future<Boolean> waitForServiceAsync(String instanceName);
+    public Future<Void> waitForServiceAsync(String instanceName);
     
-    public Future<Boolean> waitForServicesAsync(int count);
+    public Future<Void> waitForServicesAsync(int count);
     
-    public Future<Boolean> waitForServicesAsync(String... instanceNames);
+    public Future<Void> waitForServicesAsync(String... instanceNames);
     
 }

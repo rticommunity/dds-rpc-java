@@ -28,25 +28,12 @@ public abstract class RobotControlSupport {
     public interface Client 
         extends RobotControl, 
                 RobotControlAsync, 
-                ClientEndpoint<RequestType, ReplyType> 
+                ClientEndpoint 
     {       
-        /* NOTE:
-         * 1. Extend CompositeClientEndpoint for derived interfaces 
-         *    when using the basic profile.
-         * 2. A Client extends either a ClientEndpoint<TReq,TRep>
-         *    or a CompositeClientEndpoint but never both.
-         */
     }
         
-    public interface Service 
-        extends ServiceEndpoint<RequestType, ReplyType>
+    public interface Service extends ServiceEndpoint
     {
-        /* NOTE:
-         * 1. Extend CompositeServiceEndpoint for derived interfaces
-         *    when using the basic profile.
-         * 2. A Service extends either a ServiceEndpoint<TReq,TRep>
-         *    or a CompositeServiceEndpoint but never both.
-         */
     }
     
     public static final RobotControlSupport.Client 
@@ -57,12 +44,6 @@ public abstract class RobotControlSupport {
 
     public static final RobotControlSupport.Client 
     createClient(ClientParams clientParams)
-    {
-        return null;
-    }
-
-    public static final RobotControlSupport.Client 
-    createClient(Dictionary<Class<?>, ClientParams> compositeClientParams)
     {
         return null;
     }
@@ -89,14 +70,4 @@ public abstract class RobotControlSupport {
     {
         return null;
     }
-
-    public static final RobotControlSupport.Service 
-    createService(
-            RobotControl serviceImpl, 
-            Server server, 
-            Dictionary<Class<?>, ServiceParams> compositeServiceParams)
-    {
-        return null;
-    }
-
 }

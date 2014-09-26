@@ -10,6 +10,6 @@ public interface RobotControl {
     
     public float getSpeed();
     
-    public void getStatus(Status status);
+    public void getStatus(/* out */ Status status);
    
 }

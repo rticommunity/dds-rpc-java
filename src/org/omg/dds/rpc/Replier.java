@@ -7,7 +7,6 @@ import org.omg.dds.rpc.ReplierParams;
 import org.omg.dds.sub.DataReader;
 import org.omg.dds.core.SampleIdentity;
 
-/* Replier can't be a ServiceEndpoint<T, U> because it does not support pause/resume */
 public interface Replier<TReq, TRep> extends RPCEntity 
 {
     public void sendReply(
