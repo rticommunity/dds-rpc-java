@@ -4,6 +4,6 @@ import java.util.EventListener;
 
 public interface FutureCompletionListener<T> extends EventListener {
 
-    void onComplete(org.omg.dds.rpc.Future<T> future);
+    void onComplete(java.util.concurrent.Future<T> future);
     
 }
